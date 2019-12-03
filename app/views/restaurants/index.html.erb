@@ -16,14 +16,26 @@
       <tr>
         <td><%= restaurant.name %></td>
         <td><%= restaurant.user %></td>
+        <% if policy(restaurant).show? %>
+        <!-- everybody can see everything -->
         <td><%= link_to 'Show', restaurant %></td>
+        <% end %>
+
+        <!-- only the creator -->
+        <% if policy(restaurant).edit? %>
         <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
+        <% end %>
+        <!-- only the creator -->
+        <% if policy(restaurant).destroy? %>
         <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Restaurant', new_restaurant_path %>
+<!-- everybody should be able to create -->
+<% if policy(Restaurant).create? %>
+  <%= link_to 'New Restaurant', new_restaurant_path %>
+<% end %>
