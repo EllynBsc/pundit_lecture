@@ -1,11 +1,7 @@
 class RestaurantPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      # if user.admin?
         scope.all #scope is the Restaurant class
-      # else
-      #   scope.where(user: user)
-      # end
       # Restaurant.all
     end
   end
